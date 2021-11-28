@@ -13,13 +13,15 @@ const (
 	root = "./fileServer/"
 )
 
-func GetFile(conn net.Conn, fName string) {
+func GetFile(conn net.Conn, fName string, fSize string) {
 	defer conn.Close()
+
 	file, err := os.Create(root + uuid.New().String() + "." + strings.Split(fName, ".")[2])
 	if err != nil {
 		log.Println(err)
 		return
 	}
+
 	defer file.Close()
 
 	_, err = io.Copy(file, conn)

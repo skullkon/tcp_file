@@ -3,7 +3,6 @@ package ftp
 import (
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net"
 	"strings"
 )
@@ -20,14 +19,16 @@ func HandleConn(conn net.Conn) {
 
 		str := string(input[0:n])
 		cmd := strings.Split(str, "\n")
+		fmt.Println(string(input))
 		switch cmd[0] {
 		case "send":
 			fmt.Println("зашел ")
-			GetFile(conn, cmd[1])
+			GetFile(conn, cmd[1], cmd[2])
 		case "ls":
 			files, err := ioutil.ReadDir("./fileServer")
 			if err != nil {
-				log.Fatal(err)
+				fmt.Println(err)
+				return
 			}
 
 			for _, file := range files {

@@ -11,7 +11,7 @@ func SendFile(conn net.Conn, fName string) {
 	defer conn.Close()
 	file, err := os.Open(root + fName)
 	if err != nil {
-		log.Println(err)
+		//logger.Log(conn,fName,f)
 		return
 	}
 	defer file.Close()

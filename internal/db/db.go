@@ -1,5 +1,3 @@
 package db
 
-func Connect(dsn string) {
-
-}
+// добавить запись в базу данных

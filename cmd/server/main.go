@@ -1,9 +1,13 @@
 package main
 
 import (
-	"net"
-
+	"github.com/joho/godotenv"
 	"github.com/skullkon/tcp_file/internal/ftp"
+	"net"
+)
+
+var (
+	_ = godotenv.Load()
 )
 
 func main() {
