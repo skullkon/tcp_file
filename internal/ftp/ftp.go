@@ -1,19 +1,31 @@
 package ftp
 
 import (
-	"io"
+	"fmt"
 	"net"
-	"os"
+	"strings"
 )
 
 func HandleConn(conn net.Conn) {
 	defer conn.Close()
 
 	for {
+		input := make([]byte, (1024 * 4))
+		n, err := conn.Read(input)
+		if err != nil {
+			return
+		}
 
-		file, _ := os.Create("./file.txt")
-		defer file.Close()
-		_, _ = io.Copy(file, conn)
+		str := string(input[0:n])
+		cmd := strings.Split(str, "\n")
+		switch cmd[0] {
+		case "send":
+			fmt.Println("зашел ")
+			GetFile(conn, cmd[1])
+		default:
+			fmt.Println("тест")
+		}
+
 		break
 	}
 }
