@@ -2,6 +2,8 @@ package ftp
 
 import (
 	"fmt"
+	"io/ioutil"
+	"log"
 	"net"
 	"strings"
 )
@@ -22,6 +24,16 @@ func HandleConn(conn net.Conn) {
 		case "send":
 			fmt.Println("зашел ")
 			GetFile(conn, cmd[1])
+		case "ls":
+			files, err := ioutil.ReadDir("./fileServer")
+			if err != nil {
+				log.Fatal(err)
+			}
+
+			for _, file := range files {
+				conn.Write([]byte(file.Name() + "\n"))
+			}
+
 		default:
 			fmt.Println("тест")
 		}

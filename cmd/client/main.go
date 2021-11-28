@@ -24,21 +24,26 @@ func main() {
 			fmt.Scanln(&fileName)
 			fs.SendFile(conn, fileName, "send")
 			break
-			// fmt.Println("Sending your " + fileName)
+		// fmt.Println("Sending your " + fileName)
 
-			// fmt.Scanln(&pass)
-			// fmt.Println("Sending your " + fileName)
+		// fmt.Scanln(&pass)
+		// fmt.Println("Sending your " + fileName)
 
-			// case "download":
-			// 	fmt.Print("Input filename: ")
-			// 	var fileName string
-			// 	fmt.Scanln(&fileName)
-			// 	fmt.Println("Sending your " + fileName)
-			// case "ls":
-			// 	fmt.Print("Input filename: ")
-			// 	var fileName string
-			// 	fmt.Scanln(&fileName)
-			// 	fmt.Println("Sending your " + fileName)
+		// case "download":
+		// 	fmt.Print("Input filename: ")
+		// 	var fileName string
+		// 	fmt.Scanln(&fileName)
+		// 	fmt.Println("Sending your " + fileName)
+		case "ls":
+			fmt.Print(" ------------- List of available files ------------- \n")
+			fs.Ls(conn, "ls")
+			fmt.Print(" --------------------------------------------------- \n")
+		case "get":
+			fmt.Print("Input filename: ")
+			var fileName string
+			// var pass string
+			fmt.Scanln(&fileName)
+			fs.GetFile(conn, fileName, "get")
 		}
 
 	}
