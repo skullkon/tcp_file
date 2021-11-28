@@ -14,7 +14,7 @@ const (
 )
 
 func GetFile(conn net.Conn, fName string) {
-
+	defer conn.Close()
 	file, err := os.Create(root + uuid.New().String() + "." + strings.Split(fName, ".")[2])
 	if err != nil {
 		log.Println(err)
@@ -27,5 +27,4 @@ func GetFile(conn net.Conn, fName string) {
 		log.Println(err)
 		return
 	}
-	conn.Close()
 }

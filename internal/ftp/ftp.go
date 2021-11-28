@@ -33,6 +33,8 @@ func HandleConn(conn net.Conn) {
 			for _, file := range files {
 				conn.Write([]byte(file.Name() + "\n"))
 			}
+		case "get":
+			SendFile(conn, cmd[1])
 
 		default:
 			fmt.Println("тест")

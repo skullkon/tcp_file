@@ -1,32 +1,25 @@
 package ftp
 
-//
-//import (
-//	"github.com/google/uuid"
-//	"io"
-//	"log"
-//	"net"
-//	"os"
-//	"strings"
-//)
-//
-//const (
-//	root = "./fileServer/"
-//)
-//
-//func SendFile(conn net.Conn, fName string) {
-//
-//	file, err := os.Open(root + uuid.New().String())
-//	if err != nil {
-//		log.Println(err)
-//		return
-//	}
-//	defer file.Close()
-//
-//	_, err = io.Copy(file, conn)
-//	if err != nil {
-//		log.Println(err)
-//		return
-//	}
-//	conn.Close()
-//}
+import (
+	"io"
+	"log"
+	"net"
+	"os"
+)
+
+func SendFile(conn net.Conn, fName string) {
+	defer conn.Close()
+	file, err := os.Open(root + fName)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	defer file.Close()
+
+	_, err = io.Copy(conn, file)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
+}
